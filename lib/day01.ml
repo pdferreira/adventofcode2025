@@ -1,22 +1,5 @@
-open In_channel
 open List
-
-let read_lines path =
-  let raw_lines = with_open_text path input_lines in
-  map String.trim raw_lines
-;;
-
-let skip_chars n s = String.sub s n (String.length s - n)
-;;
-
-let sign n =
-  if n = 0 then 0
-  else if n < 0 then -1
-  else 1
-;;
-
-let int_of_bool b = if b then 1 else 0
-;;
+open Utils
 
 let to_number instr =
   let sign = if instr.[0] = 'L' then -1 else 1 in
@@ -29,7 +12,7 @@ let rotate n r = (n + r) mod 100
 
 let count_zero_stops start rs =
   rs
-  |> fold_left (fun l r -> (rotate (hd l) r) :: l) [50]
+  |> fold_left (fun l r -> (rotate (hd l) r) :: l) [start]
   |> filter ((=) 0)
   |> length
 ;;
@@ -65,10 +48,12 @@ let solve_part2 path =
   |> count_zero_ticks 50
 ;;
 
-[
+let inputs = [
   "inputs/day01_example";
   "inputs/day01_in"
-] |> iter (fun path ->
+]
+
+let solve () = inputs |> iter (fun path ->
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part1 path)) ;
   print_endline ("Part 2: " ^ string_of_int (solve_part2 path)) ;

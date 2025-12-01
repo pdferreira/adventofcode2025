@@ -1,0 +1,1 @@
+let () = Lib.Day01.solve ()
