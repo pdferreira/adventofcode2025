@@ -34,3 +34,7 @@ setup.log
 
 # Local OPAM switch
 _opam/
+
+# Non-example problem inputs
+inputs/*
+!inputs/*_example*
