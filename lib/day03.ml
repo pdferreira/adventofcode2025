@@ -1,23 +1,22 @@
 open List
 open Utils
 
-let rec inits l = match l with
-  | [] -> []
-  | [_] -> []
-  | x :: xs -> x :: inits xs
+let rec find_largest_joltage ?(acc = 0) ~n_batteries bs =
+  if n_batteries = 0 then
+    acc
+  else
+    let max_d = fold_left max 0 (drop_right (n_batteries - 1) bs) in
+    let max_idx = find_index ((=) max_d) bs |> Option.get in
+    find_largest_joltage
+      ~acc:(acc * 10 + max_d)
+      ~n_batteries:(n_batteries - 1)
+      (drop (max_idx + 1) bs)
 ;;
 
-let find_largest_joltage ns =
-  let max_d = fold_left max 0 (inits ns) in
-  let max_idx = find_index ((=) max_d) ns |> Option.get in
-  let next_max_d = fold_left max 0 (drop (max_idx + 1) ns) in
-  max_d * 10 + next_max_d
-;;
-
-let solve_part1 path =
+let solve_part path ~n_batteries =
   read_lines path
-  |> map (fun s -> String.fold_right (fun c cs -> (Char.code c - Char.code '0') :: cs) s [])
-  |> map find_largest_joltage
+  |> map (fun s -> String.fold_right (fun c cs -> digit_to_int c :: cs) s [])
+  |> map (find_largest_joltage ~n_batteries)
   |> fold_left (+) 0
 ;;
 
@@ -28,6 +27,7 @@ let inputs = [
 
 let solve () = inputs |> iter (fun path ->
   print_endline ("[" ^ path ^ "]") ;
-  print_endline ("Part 1: " ^ string_of_int (solve_part1 path)) ;
+  print_endline ("Part 1: " ^ string_of_int (solve_part path ~n_batteries:2)) ;
+  print_endline ("Part 1: " ^ string_of_int (solve_part path ~n_batteries:12)) ;
 ) 
 ;;

@@ -17,3 +17,13 @@ let sign n =
 
 let int_of_bool b = if b then 1 else 0
 ;;
+
+
+let rec drop_right n l = match l with
+  | [] -> []
+  | _ when length l <= n -> []
+  | x :: xs -> x :: drop_right n xs
+;;
+
+let digit_to_int c = Char.code c - Char.code '0'
+;;
