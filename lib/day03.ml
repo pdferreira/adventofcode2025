@@ -15,7 +15,7 @@ let rec find_largest_joltage ?(acc = 0) ~n_batteries bs =
 
 let solve_part path ~n_batteries =
   read_lines path
-  |> map (fun s -> String.fold_right (fun c cs -> digit_to_int c :: cs) s [])
+  |> map (fun s -> String.fold_right (fun c cs -> int_of_digit c :: cs) s [])
   |> map (find_largest_joltage ~n_batteries)
   |> fold_left (+) 0
 ;;
