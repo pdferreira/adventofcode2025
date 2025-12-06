@@ -1,1 +1,1 @@
-let () = Lib.Day05.solve ()
+let () = Lib.Day06.solve ()
