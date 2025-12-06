@@ -34,14 +34,8 @@ let solve_part2 path =
         fold_left op_f base (map parse_num (rev rev_ns :: nss))
   )
   |> fold_left (+) 0
-    
-let inputs = [
-  "inputs/day06_example";
-  "inputs/day06_in"
-]
 
-let solve () = inputs |> iter (fun path ->
+let solve path =
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part1 path)) ;
   print_endline ("Part 2: " ^ string_of_int (solve_part2 path)) ;
-)

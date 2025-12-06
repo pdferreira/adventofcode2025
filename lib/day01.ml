@@ -48,14 +48,8 @@ let solve_part2 path =
   |> count_zero_ticks 50
 ;;
 
-let inputs = [
-  "inputs/day01_example";
-  "inputs/day01_in"
-]
-
-let solve () = inputs |> iter (fun path ->
+let solve path =
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part1 path)) ;
   print_endline ("Part 2: " ^ string_of_int (solve_part2 path)) ;
-) 
 ;;

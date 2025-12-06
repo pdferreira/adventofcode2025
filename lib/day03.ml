@@ -20,14 +20,7 @@ let solve_part path ~n_batteries =
   |> fold_left (+) 0
 ;;
 
-let inputs = [
-  "inputs/day03_example";
-  "inputs/day03_in"
-]
-
-let solve () = inputs |> iter (fun path ->
+let solve path =
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part path ~n_batteries:2)) ;
   print_endline ("Part 1: " ^ string_of_int (solve_part path ~n_batteries:12)) ;
-) 
-;;

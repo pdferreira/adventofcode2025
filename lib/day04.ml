@@ -53,13 +53,7 @@ let solve_part f path =
   |> Array.of_list
   |> f
 
-let inputs = [
-  "inputs/day04_example";
-  "inputs/day04_in"
-]
-
-let solve () = inputs |> iter (fun path ->
+let solve path =
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part count_accessible_rolls path)) ;
   print_endline ("Part 2: " ^ string_of_int (solve_part clear_all_accessible_rolls path)) ;
-)

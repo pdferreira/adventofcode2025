@@ -57,14 +57,7 @@ let solve_part is_invalid path =
   |> fold_left (+) 0
 ;;
 
-let inputs = [
-  "inputs/day02_example";
-  "inputs/day02_in"
-]
-
-let solve () = inputs |> iter (fun path ->
+let solve path =
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part is_invalid_id_v1 path)) ;
   print_endline ("Part 2: " ^ string_of_int (solve_part is_invalid_id_v2 path)) ;
-) 
-;;

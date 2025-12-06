@@ -27,13 +27,7 @@ let solve_part2 path =
   let sorted_rs = sort (Pair.compare Int.compare Int.compare) fresh_rs in
   count_ids sorted_rs
 
-let inputs = [
-  "inputs/day05_example";
-  "inputs/day05_in"
-]
-
-let solve () = inputs |> iter (fun path ->
+let solve path =
   print_endline ("[" ^ path ^ "]") ;
   print_endline ("Part 1: " ^ string_of_int (solve_part1 path)) ;
   print_endline ("Part 2: " ^ string_of_int (solve_part2 path)) ;
-)
