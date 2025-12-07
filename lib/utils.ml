@@ -57,6 +57,11 @@ let rec split_on f xs = match xs with
       | [] -> [[x]]
       | x' :: xs' -> (x :: x') :: xs'
 
+let rec update_assoc f key base l = match l with
+  | [] -> [(key, f base)]
+  | (k, v) :: l' when key = k -> (k, f v) :: l'
+  | kv :: l' -> kv :: update_assoc f key base l'
+
 (** Functions **)
 
 let rec fixpoint f b =
