@@ -62,6 +62,38 @@ let rec update_assoc f key base l = match l with
   | (k, v) :: l' when key = k -> (k, f v) :: l'
   | kv :: l' -> kv :: update_assoc f key base l'
 
+let rec combinations l = match l with
+  | [] -> []
+  | x :: xs -> map (fun x' -> (x, x')) xs @ combinations xs
+
+let remove i l =
+  if i < 0 || i >= length l then
+    failwith ("remove: Invalid index " ^ (string_of_int i) ^ " for list with length " ^ (string_of_int (length l)))
+  else
+    let rec inner_remove i = function
+      | [] -> (None, [])
+      | x :: xs ->
+        if i = 0 then
+          (Some x, xs)
+        else
+          inner_remove (i - 1) xs |> Pair.map_snd (cons x)
+    in
+    inner_remove i l
+
+let update i f l =
+  if i < 0 || i >= length l then
+    failwith ("update: Invalid index " ^ (string_of_int i) ^ " for list with length " ^ (string_of_int (length l)))
+  else
+    let rec inner_update i = function
+      | [] -> []
+      | x :: xs ->
+        if i = 0 then
+          f x :: xs
+        else
+          x :: inner_update (i - 1) xs
+    in
+    inner_update i l
+
 (** Functions **)
 
 let rec fixpoint f b =
