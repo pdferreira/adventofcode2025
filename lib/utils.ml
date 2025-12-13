@@ -102,3 +102,25 @@ let rec fixpoint f b =
     b
   else
     fixpoint f new_b
+
+(** Coordinates **)
+
+type coord = int list
+
+let parse_coord s: coord = s |> String.split_on_char ',' |> map int_of_string
+
+let coord_compare = List.compare Int.compare
+
+let distance (b1: coord) (b2: coord) =
+  map2 (fun v1 v2 -> float (v1 - v2) ** 2.) b1 b2
+  |> fold_left (+.) 0.
+  |> sqrt
+
+module CoordOrd: Set.OrderedType with type t = coord = struct
+  type t = coord
+  let compare = coord_compare
+end
+
+module CoordSet = Set.Make(CoordOrd)
+
+module CoordMap = Map.Make(CoordOrd)
