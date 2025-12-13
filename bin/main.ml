@@ -12,6 +12,7 @@ let get_day (name: string): (module DayModule) = match name with
   | "day09" -> (module Lib.Day09)
   | "day10" -> (module Lib.Day10)
   | "day11" -> (module Lib.Day11)
+  | "day12" -> (module Lib.Day12)
   | _ -> failwith ("Unknown: " ^ name)
 
 let input_dir = "inputs"
